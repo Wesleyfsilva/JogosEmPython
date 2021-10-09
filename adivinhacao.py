@@ -1,5 +1,15 @@
 import random
 
+
+"""
+Substituindo forma de print com formatação
+
+De:
+    print('seu nome é {}'.format(nome))
+Para:
+    print(f'seu nome é {nome}')
+    
+"""
 def jogar():
 
     print("*********************************")
@@ -23,30 +33,35 @@ def jogar():
         total_de_tentativas = 5
 
     for rodada in range(1, total_de_tentativas + 1):
-        print("Tentativa {} de {}".format(rodada, total_de_tentativas))
+        print(f"Tentativa {rodada} de {total_de_tentativas}")
 
-        chute_str = input("Digite um número entre 1 e 100: ")
-        print("Você digitou " , chute_str)
-        chute = int(chute_str)
+        # convertendo direto para inteiro ja que não é nescessario utilizar a parte str desta variavel
+        chute = int(input("Digite um número entre 1 e 100: "))
+        print(f"Você digitou {chute}")
 
         if(chute < 1 or chute > 100):
             print("Você deve digitar um número entre 1 e 100!")
             continue
 
+        """ Não é nescessario utilizar estas variavies abaixo ja que pode ser feita a comparação direta poupando espaço na memoria
         acertou = chute == numero_secreto
         maior   = chute > numero_secreto
         menor   = chute < numero_secreto
+        """
 
-        if(acertou):
-            print("Você acertou e fez {} pontos!".format(pontos))
+        if(chute == numero_secreto):
+            print(f"Você acertou e fez {pontos} pontos!")
             break
         else:
-            if(maior):
+            if(chute > numero_secreto):
                 print("Você errou! O seu chute foi maior do que o número secreto.")
-            elif(menor):
+            elif(chute < numero_secreto):
                 print("Você errou! O seu chute foi menor do que o número secreto.")
+            """
+            Outra variavel que não precisa existir
             pontos_perdidos = abs(numero_secreto - chute)
-            pontos = pontos - pontos_perdidos
+            """
+            pontos = pontos - abs(numero_secreto - chute)
 
     print("Fim do jogo")
 
